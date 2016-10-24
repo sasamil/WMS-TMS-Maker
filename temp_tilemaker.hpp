@@ -1,8 +1,27 @@
+/***************************************************************************
+ *   Copyright (C) 2016 by Саша Миленковић                                 *
+ *   sasa.milenkovic.xyz@gmail.com                                         *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *   ( http://www.gnu.org/licenses/gpl-3.0.en.html )                       *
+ *									   *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+ ***************************************************************************/
 
 #ifndef RECURSIVE_TEMPLATEMPG_TMSMAKER_HPP_INCLUDED
 #define RECURSIVE_TEMPLATEMPG_TMSMAKER_HPP_INCLUDED
 
-#include <cstring> 
+#include <cstring>
 #include <fstream>
 
 
@@ -18,15 +37,15 @@ extern "C" {
 
 const uint ROUNDING_DIGITS = 2;
 
-const uint MAXNUM_CACHE_LEVELS = 15; 
+const uint MAXNUM_CACHE_LEVELS = 15;
 
 const uint TILESIZE = 512;
 
 const uint TILESIZE_2 = TILESIZE / 2;
-const uint TILESIZE_2_BYTES = TILESIZE_2 * 3; 
+const uint TILESIZE_2_BYTES = TILESIZE_2 * 3;
 const uint TILESIZE_X_TILESIZE_2_BYTES = TILESIZE * TILESIZE_2_BYTES;
 
-const uint TILEWIDTH_BYTES = TILESIZE * 3; 
+const uint TILEWIDTH_BYTES = TILESIZE * 3;
 const uint TILESIZE_BYTES = TILESIZE * TILEWIDTH_BYTES;
 
 fs::path TMS_DIR(fs::current_path());
@@ -143,7 +162,7 @@ public:
         }
 
         if(NULL == TmsWriter<DIM-1>::outflex(x2, y2))
-            return NULL; 
+            return NULL;
         else
         {
             iterrow  = tilebytes[DIM] + TILESIZE_X_TILESIZE_2_BYTES, iter = iterrow;
@@ -216,7 +235,7 @@ public:
                     *iter++ = .25*uired;
                 }
             }
-        } 
+        }
 
         char filename[256];
         sprintf(filename, "%s/%d/%d/%d.jpg", TMS_DIR.string().c_str(), HIGHEST_LEVEL-(DIM+LEVEL_S), x, /*rows_by_levels[HIGHEST_LEVEL-(DIM+LEVEL_S)]-*/y);
@@ -245,7 +264,7 @@ class TmsWriter<0>
         FILE* infile = fopen( filename, "rb" );
 
         if(NULL == infile)
-            return NULL;  
+            return NULL;
 
 
 		struct jpeg_decompress_struct cinfo;
@@ -272,7 +291,7 @@ class TmsWriter<0>
 		jpeg_finish_decompress( &cinfo );
 		jpeg_destroy_decompress( &cinfo );
 		free( row_pointer[0] );
-			
+
 		fclose( infile );
 
         return tilebytes[0];

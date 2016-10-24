@@ -1,6 +1,25 @@
+/***************************************************************************
+ *   Copyright (C) 2016 by Саша Миленковић                                 *
+ *   sasa.milenkovic.xyz@gmail.com                                         *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *   ( http://www.gnu.org/licenses/gpl-3.0.en.html )                       *
+ *									   *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+ ***************************************************************************/
 
-#include <cstdlib> 
-#include <iomanip> 
+#include <cstdlib>
+#include <iomanip>
 
 #include "temp_tilemaker.hpp"
 
@@ -69,7 +88,7 @@ const uint LEVEL_S = 0;
 uint HIGHEST_LEVEL = 0;
 uint HIGHEST2 = 0;
 
-uint PRECISION = 8; 
+uint PRECISION = 8;
 
 bool exceptionAtVeryLastTile = false;
 
@@ -78,10 +97,10 @@ int count[8];
 FILE* outfile[8];
 
 uint jpegbuffer_size;
-unsigned char* raw_image; 
-unsigned char dest_extended[TILESIZE_BYTES ]; 
-unsigned char jpegbuffer[TILESIZE_BYTES ];  
-                                            
+unsigned char* raw_image;
+unsigned char dest_extended[TILESIZE_BYTES ];
+unsigned char jpegbuffer[TILESIZE_BYTES ];
+
 static void init_source (j_decompress_ptr cinfo) {}
 
 static boolean fill_input_buffer (j_decompress_ptr cinfo)
@@ -106,7 +125,7 @@ static void jpeg_mem_src (j_decompress_ptr cinfo, void* buffer, long nbytes)
 {
     struct jpeg_source_mgr* src;
 
-    if (cinfo->src == NULL) {  
+    if (cinfo->src == NULL) {
         cinfo->src = (struct jpeg_source_mgr *)
             (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_PERMANENT, sizeof(struct jpeg_source_mgr));
     }
@@ -190,7 +209,7 @@ int UpNullDownJpeg2Jpeg(const char* outputfilename)
 {
     memset(dest_extended, BGD, UP_JPEG_BYTES);
     memcpy(dest_extended+UP_JPEG_BYTES, raw_image, DOWN_JPEG_BYTES);
-    free(raw_image); 
+    free(raw_image);
     if(write_jpeg_file(outputfilename, dest_extended) != 1) return -1;
 
     return 1;
@@ -204,7 +223,7 @@ int LeftJpegRightNull2Jpeg(const char* outputfilename)
     for(uint ii=0; ii<TILESIZE; ++ii, dest2+=TILEWIDTH_BYTES, src2+=RIGHT_RESIDUAL_BYTES)
         memcpy(dest2, src2, RIGHT_RESIDUAL_BYTES);
 
-    free(raw_image); 
+    free(raw_image);
     if(write_jpeg_file(outputfilename, dest_extended) != 1) return -1;
 
     return 1;
@@ -218,7 +237,7 @@ int LeftDownJpegRightUpNull2Jpeg(const char* outputfilename)
     for(uint ii=TILESIZE-TOP_RESIDUAL; ii<TILESIZE; ++ii, dest2+=TILEWIDTH_BYTES, src2+=RIGHT_RESIDUAL_BYTES)
         memcpy(dest2, src2, RIGHT_RESIDUAL_BYTES);
 
-    free(raw_image); 
+    free(raw_image);
 
     if(write_jpeg_file(outputfilename, dest_extended) != 1) return -1;
 
@@ -330,8 +349,8 @@ void OnCompleteDown( const happyhttp::Response* r, void* userdata )
 
     sprintf(filename, "%s/%d/%d/%d.jpg", TMS_DIR.string().c_str(), CURRENT_ZOOM, idirnumber, ifilenumber);
 
-    jpg_compressed_bytes_2_uncompressed_bytes(); 
-    UpNullDownJpeg2Jpeg(filename); 
+    jpg_compressed_bytes_2_uncompressed_bytes();
+    UpNullDownJpeg2Jpeg(filename);
 
     if(VERBOSE)
         std::cout << "COMPLETE DOWN Response " << " (" << jpegbuffer_size << " bytes)   " << 100.0*(1.0+procesid)/NUMCOLS/NUMROWS << "%" << std::endl;
@@ -346,8 +365,8 @@ void OnCompleteLeft( const happyhttp::Response* r, void* userdata )
 
     sprintf(filename, "%s/%d/%d/%d.jpg", TMS_DIR.string().c_str(), CURRENT_ZOOM, idirnumber, ifilenumber);
 
-    jpg_compressed_bytes_2_uncompressed_bytes(); 
-    LeftJpegRightNull2Jpeg(filename); 
+    jpg_compressed_bytes_2_uncompressed_bytes();
+    LeftJpegRightNull2Jpeg(filename);
 
     if(VERBOSE)
         std::cout << "COMPLETE LEFT Response " << " (" << jpegbuffer_size << " bytes)   " << 100.0*(1.0+procesid)/NUMCOLS/NUMROWS << "%" << std::endl;
@@ -363,7 +382,7 @@ void OnCompleteLeftDown( const happyhttp::Response* r, void* userdata )
     sprintf(filename, "%s/%d/%d/%d.jpg", TMS_DIR.string().c_str(), CURRENT_ZOOM, idirnumber, ifilenumber);
 
     jpg_compressed_bytes_2_uncompressed_bytes();
-    LeftDownJpegRightUpNull2Jpeg(filename); 
+    LeftDownJpegRightUpNull2Jpeg(filename);
 
     if(VERBOSE)
         std::cout << "COMPLETE LEFT-DOWN Response " << " (" << jpegbuffer_size << " bytes)   " << 100.0*(1.0+procesid)/NUMCOLS/NUMROWS << "%" << std::endl;
@@ -415,7 +434,7 @@ void updateGlobalConstants()
     BBOX_CENTER_X = (BBOX_LEFT+BBOX_RIGHT)/2;
     BBOX_CENTER_Y = (BBOX_TOP+BBOX_BOTTOM)/2;
 
-    if(RES2 != 0.0) 
+    if(RES2 != 0.0)
     {
         double resl = RESOLUTION;
         HIGHEST2 = 0;
@@ -439,7 +458,7 @@ void updateGlobalConstants()
 
     double dres = RESOLUTION;
     PRECISION = 0;
-    while(dres - (int)dres > 1e-8) 
+    while(dres - (int)dres > 1e-8)
     {
         dres *= 10.0;
         ++PRECISION;
@@ -510,12 +529,12 @@ void createDirs(const char* chdirtms)
     }
 
     NUMCOLS = static_cast<uint>((BBOX_RIGHT - BBOX_LEFT) / TILESIZE / RESOLUTION);
-    if( BBOX_RIGHT - BBOX_LEFT - TILESIZE*RESOLUTION*NUMCOLS > RESOLUTION || 0==NUMCOLS) 
+    if( BBOX_RIGHT - BBOX_LEFT - TILESIZE*RESOLUTION*NUMCOLS > RESOLUTION || 0==NUMCOLS)
         ++NUMCOLS;
 
 
     uint numcols = NUMCOLS;
-    for(int jj=HIGHEST_LEVEL; jj>=0; jj--) 
+    for(int jj=HIGHEST_LEVEL; jj>=0; jj--)
     {
         sprintf(subfolder, "%d", jj);
         fs::create_directory(TMS_DIR / subfolder);
@@ -538,7 +557,7 @@ void makeCacheLevel(int level)
 
     CURRENT_ZOOM = level;
 
-	double tempres = RESOLUTION * (1 << (HIGHEST_LEVEL-level)); 
+	double tempres = RESOLUTION * (1 << (HIGHEST_LEVEL-level));
 
     TILELENGTH = TILESIZE * tempres;
 
@@ -548,7 +567,7 @@ void makeCacheLevel(int level)
 	NUMCOLS = static_cast<uint>( scenewidth / TILELENGTH );
     RIGHT_RESIDUAL = static_cast<int>(0.5 + (scenewidth - TILELENGTH*NUMCOLS)/tempres);
     RIGHT_RESIDUAL_BYTES = RIGHT_RESIDUAL * 3;
-    if( RIGHT_RESIDUAL > 0 || 0==NUMCOLS) 
+    if( RIGHT_RESIDUAL > 0 || 0==NUMCOLS)
         ++NUMCOLS;
 
     NUMROWS = static_cast<uint>( sceneheight / TILELENGTH );
@@ -576,7 +595,7 @@ void makeCacheLevel(int level)
 void makeHttpTest()
 {
     std::stringstream strstream;
-    strstream << std::fixed << std::setprecision(PRECISION); 
+    strstream << std::fixed << std::setprecision(PRECISION);
     try
     {
         happyhttp::Connection conn = happyhttp::Connection( HOST.c_str(), PORT );
@@ -584,7 +603,7 @@ void makeHttpTest()
         strstream << URLSUFFIX
                   << "?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap"
                   << "&LAYERS=" << LAYER
-                  << "&FORMAT=image/jpeg" 
+                  << "&FORMAT=image/jpeg"
                   << "&SRS=" << CRS
                   << "&BBOX="
                   << BBOX_LEFT << "," << BBOX_BOTTOM << ","
@@ -648,20 +667,20 @@ getchar();
 void makeTmsBase()
 {
     std::stringstream strstream;
-    strstream << std::fixed << std::setprecision(PRECISION); 
+    strstream << std::fixed << std::setprecision(PRECISION);
 
     try
 	{
         happyhttp::Connection conn = happyhttp::Connection( HOST.c_str(), PORT );
 
-        if(_hpos2 < BBOX_RIGHT) 
+        if(_hpos2 < BBOX_RIGHT)
         {
             for(; _vpos2 < BBOX_TOP; _vpos0 = _vpos2, _vpos2 += TILELENGTH, ++_vindex, ++_id)
             {
                 if(VERBOSE)
                     std::cout << std::endl << "wms-request " << std::hex << std::showbase << _id+1 << std::dec << "   " <<  _hindex << " " << _vindex << std::endl;
 
-                strstream.str(std::string()); 
+                strstream.str(std::string());
                 strstream << URLSUFFIX
                           << "?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/jpeg"
                           << "&LAYERS=" << LAYER
@@ -682,7 +701,7 @@ void makeTmsBase()
 				if(VERBOSE)
 					std::cout << std::endl << "wms-request " << std::hex << std::showbase << _id+1 << std::dec << "   " <<  _hindex << " " << _vindex << std::endl;
 
-				strstream.str(std::string()); 
+				strstream.str(std::string());
 				strstream << URLSUFFIX
 						  << "?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/jpeg"
 						  << "&LAYERS=" << LAYER
@@ -701,14 +720,14 @@ void makeTmsBase()
 			}
         }
 
-        else 
+        else
         {
             for(; _vpos2 < BBOX_TOP; _vpos0 = _vpos2, _vpos2 += TILELENGTH, ++_vindex, ++_id)
             {
                 if(VERBOSE)
                     std::cout << std::endl << "wms-request " << std::hex << std::showbase << _id+1 << std::dec << "   " <<  _hindex << " " << _vindex << std::endl;
 
-                strstream.str(std::string()); 
+                strstream.str(std::string());
                 strstream << URLSUFFIX
                           << "?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/jpeg"
                           << "&LAYERS=" << LAYER
@@ -729,7 +748,7 @@ void makeTmsBase()
 				if(VERBOSE)
 					std::cout << std::endl << "wms-request " << std::hex << std::showbase << _id+1 << std::dec << "   " <<  _hindex << " " << _vindex << std::endl;
 
-				strstream.str(std::string()); 
+				strstream.str(std::string());
 				strstream << URLSUFFIX
 						  << "?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/jpeg"
 						  << "&LAYERS=" << LAYER
@@ -760,7 +779,7 @@ void makeTmsBase()
                 if(VERBOSE)
                     std::cout << std::endl << "wms-request " << std::hex << std::showbase << _id+1 << std::dec << "   " <<  _hindex << " " << _vindex << std::endl;
 
-                strstream.str(std::string()); 
+                strstream.str(std::string());
                 strstream << URLSUFFIX
                           << "?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/jpeg"
                           << "&LAYERS=" << LAYER
@@ -781,7 +800,7 @@ void makeTmsBase()
 				if(VERBOSE)
 					std::cout << std::endl << "wms-request " << std::hex << std::showbase << _id+1 << std::dec << "   " <<  _hindex << " " << _vindex << std::endl;
 
-				strstream.str(std::string()); 
+				strstream.str(std::string());
 				strstream << URLSUFFIX
 						  << "?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/jpeg"
 						  << "&LAYERS=" << LAYER
@@ -809,7 +828,7 @@ void makeTmsBase()
 				if(VERBOSE)
 					std::cout << std::endl << "wms-request " << std::hex << std::showbase << _id+1 << std::dec << "   " <<  _hindex << " " << _vindex << std::endl;
 
-				strstream.str(std::string()); 
+				strstream.str(std::string());
 				strstream << URLSUFFIX
 						  << "?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/jpeg"
 						  << "&LAYERS=" << LAYER
@@ -830,7 +849,7 @@ void makeTmsBase()
 				if(VERBOSE)
 					std::cout << std::endl << "wms-request " << std::hex << std::showbase << _id+1 << std::dec << "   " <<  _hindex << " " << _vindex << std::endl;
 
-				strstream.str(std::string()); 
+				strstream.str(std::string());
 				strstream << URLSUFFIX
 						  << "?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/jpeg"
 						  << "&LAYERS=" << LAYER
@@ -846,7 +865,7 @@ void makeTmsBase()
 					conn.pump();
 			}
 		}
-    } 
+    }
 
     catch( happyhttp::Wobbly& e )
     {
@@ -904,7 +923,7 @@ void makeTmsComplete()
             std::cout << std::endl << "Outflex processing: 0%...";
             std::cout.flush();
         }
-        outflex_p(0, 0); 
+        outflex_p(0, 0);
         if(VERBOSE)
             std::cout << "100% - OK!" << std::endl;
 
@@ -1015,7 +1034,7 @@ void makeTmsSampleOL2_amended()
         tempres /= 2.;
     }
 
-    out << tempres << "]});" << std::endl 
+    out << tempres << "]});" << std::endl
         << "      map.addLayer(tms);" << std::endl
         << "      map.addControl(new OpenLayers.Control.KeyboardDefaults());" << std::endl
         << "      map.setCenter(new OpenLayers.LonLat(" << BBOX_CENTER_X << ", " << BBOX_CENTER_Y << "), " << HIGHEST_LEVEL-1 << ");" << std::endl
@@ -1186,7 +1205,7 @@ void makeWmsSampleOL3()
         tempres /= 2.;
     }
 
-    out << tempres << "]," << std::endl 
+    out << tempres << "]," << std::endl
         << "                projection: prj," << std::endl
         << "                zoom: " << HIGHEST_LEVEL << std::endl
         << "            })" << std::endl
