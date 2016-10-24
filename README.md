@@ -1,4 +1,4 @@
-Similar to GeoWebCache, this program creates tile cache from an existing wms-source. Moreover, it creates valid OSGeo TMS and OGC WMS services upon it. After all, there will be some HTML sample files, containing verious web-mapping JavaScript code (OpenLayers 2 and 3, ESRI JavaScript API). My intension was to illustrate how simple is to use these TMS and WMS services.
+Similar to GeoWebCache, this program creates tile cache from an existing wms-source. Moreover, it creates valid OSGeo TMS and OGC WMS services upon it. After all, after executing it, there will be some HTML sample files, containing verious web-mapping JavaScript code (OpenLayers 2 and 3, ESRI JavaScript API). My intension was to illustrate how simple is to use these TMS and WMS services.
 
 Initially, I intended to make some raw C program, for this purpose. However, the problematics itself has drawn me towards C++, boost, templates, metaprogrammings... The version presented here is without threads and cache-update options.  I hope it may be usefull, anyway.
 
