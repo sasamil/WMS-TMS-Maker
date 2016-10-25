@@ -6,6 +6,6 @@ This code has been compiled in g++, MinGW and Microsoft's VS compilers. It has b
 
 As I've already said, there is a multitreading version (much better performancies) and a version with cache-update options (imo, cache-updating is even more frequently needed than cache-creating). More or less, this part of job is over but I am still at testing phase. 
 
-Regarding this code or caching in general, if there are questions or (even better) suggestions - please, let me know. Don't hesitate to contact me.
+If there are questions in regards to this code/project, or caching in general - please, let me know. Suggestions will be welcomed. Don't hesitate to contact me.
 
 
