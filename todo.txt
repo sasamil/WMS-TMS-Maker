@@ -1,0 +1,26 @@
+
+- ArcGIS tiling schema - TMS for ArcGIS JS API
+
+- PNG support
+
+- GIF support
+
+- GeoTIFF support
+
+- turboJPEG 
+
+- reprojection
+
+- resulting WMS implemented in C/C++ cgi-script (instead of PHP)
+
+- Boost.ASIO for HTTP
+
+- no-chess structures; any structures (tiff input)
+
+- OpenLayers build 
+
+- GUI (most likely Qt5)
+
+- ArcGIS wms-html sample - limit zooms
+
+... ... ...
