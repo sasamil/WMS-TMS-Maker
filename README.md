@@ -2,7 +2,7 @@ Similar to GeoWebCache, this program creates tile cache from an existing wms-sou
 
 Initially, I had wished to develop a C-style program, for this purpose. Frankly, I started that way. However, the problematics itself was constantly drawing me towards C++, boost, templates, metaprogrammings... and I've finally come to the version presented here.  It's not final; the project is ongoing and there are other versions I'm working on. This one is without threads and cache-update options.  I hope it will be of use, anyway.
 
-This code has been compiled in g++, MinGW and Microsoft's VS compilers. It has been working on both Linux and Windows. The prerequisite for building it is that boost and libjpeg libraries are properly installed. This software also applies HappyHTTP library (scumways.com/happyhttp/happyhttp.html). Thanks to Ben Campbell for his code; it has been really usefull.
+This code has been compiled in g++, MinGW and Microsoft's VS compilers. It has been working on both Linux and Windows. The prerequisite for building it is that boost and libjpeg libraries are properly installed. This software also applies HappyHTTP library (scumways.com/happyhttp/happyhttp.html). Thanks to Ben Campbell for his code; it is really neat and usefull.
 
 As I've already said, the multitreading version exists (much better performancies) and there is a version with cache-update options (imo, cache-updating is even more frequently needed than cache-creating). More or less, these versions are over but I am still at testing phase. 
 
