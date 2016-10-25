@@ -320,7 +320,6 @@ void OnComplete( const happyhttp::Response* r, void* userdata )
 
 void OnBeginSpecial( const happyhttp::Response* r, void* userdata )
 {
-    //int procesid = *((int*)userdata);
     TMS_UNUSED(userdata)
 
     jpegbuffer_size = 0;
