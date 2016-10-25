@@ -15,8 +15,6 @@
 
 - Boost.ASIO for HTTP
 
-- no-chess structures; any structures (tiff input)
-
 - OpenLayers build 
 
 - GUI (most likely Qt5)
