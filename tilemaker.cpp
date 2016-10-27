@@ -463,6 +463,8 @@ void updateGlobalConstants()
         ++PRECISION;
     }
 
+    outflex_p = TmsWriter<20>::outflex; // I cannot imagine situation where HIGHEST_LEVEL - LEVEL_S > 20
+    /*
     switch (HIGHEST_LEVEL - LEVEL_S)
     {
     case 0:
@@ -500,6 +502,7 @@ void updateGlobalConstants()
         outflex_p = NULL;
         break;
     }
+    */
 }
 
 void createDirs(const char* chdirtms)
