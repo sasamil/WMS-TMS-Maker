@@ -64,7 +64,10 @@ class TmsWriter
 public:
     static const uchar* outflex(const uint x, const uint y)
     {
-		if(VERBOSE && DIM == HIGHEST_LEVEL - LEVEL_S - 1)
+        if(DIM > (HIGHEST_LEVEL - LEVEL_S))
+            return TmsWriter<DIM-1>::outflex(x, y);
+
+	    if(VERBOSE && DIM == HIGHEST_LEVEL - LEVEL_S - 1)
         {
             std::cout << (1==x && 1==y ? "25%..." : 0==x && 0==y ? "50%..." : 1==x && 0==y ? "75%..." : "");
             std::cout.flush();
