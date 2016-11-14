@@ -6,6 +6,6 @@ This code has been compiled in g++, MinGW and Microsoft's VS compilers. It has b
 
 As I've already said, the multitreading version exists (much better performancies) and there is a version with cache-update options (imo, cache-updating is even more frequently needed than cache-creating). More or less, these versions are over but they are still at testing phase. 
 
-If there are questions in regards to this code/project, or caching in general - please, let me know. Suggestions will be welcomed. Don't hesitate to contact me.
+If there are questions in regards to this code/project, or maps caching in general - please, let me know. Suggestions will be welcomed. Don't hesitate to contact me.
 
 
