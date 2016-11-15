@@ -1,11 +1,11 @@
 
 - ArcGIS tiling schema - TMS for ArcGIS JS API
 
+- GeoTIFF support
+
 - PNG support
 
 - GIF support
-
-- GeoTIFF support
 
 - turboJPEG 
 
