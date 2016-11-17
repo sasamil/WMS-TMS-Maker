@@ -464,45 +464,6 @@ void updateGlobalConstants()
     }
 
     outflex_p = TmsWriter<20>::outflex; // I cannot imagine situation where HIGHEST_LEVEL - LEVEL_S > 20
-    /*
-    switch (HIGHEST_LEVEL - LEVEL_S)
-    {
-    case 0:
-        outflex_p = TmsWriter<0>::outflex;
-        break;
-    case 1:
-        outflex_p = TmsWriter<1>::outflex;
-        break;
-    case 2:
-        outflex_p = TmsWriter<2>::outflex;
-        break;
-    case 3:
-        outflex_p = TmsWriter<3>::outflex;
-        break;
-    case 4:
-        outflex_p = TmsWriter<4>::outflex;
-        break;
-    case 5:
-        outflex_p = TmsWriter<5>::outflex;
-        break;
-    case 6:
-        outflex_p = TmsWriter<6>::outflex;
-        break;
-    case 7:
-        outflex_p = TmsWriter<7>::outflex;
-        break;
-    case 8:
-        outflex_p = TmsWriter<8>::outflex;
-        break;
-    case 9:
-        outflex_p = TmsWriter<9>::outflex;
-        break;
-
-    default:
-        outflex_p = NULL;
-        break;
-    }
-    */
 }
 
 void createDirs(const char* chdirtms)
