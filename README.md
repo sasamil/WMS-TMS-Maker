@@ -8,4 +8,6 @@ As I've already said, the multitreading version exists (much better performancie
 
 If there are questions in regards to this code/project, or maps caching in general - please, let me know. Suggestions will be welcomed. Don't hesitate to contact me.
 
+(<i>This program can be executed within a Qt made GUI. That version can be found <a href="https://github.com/sasamil/MS-TMS-Maker-Qt-GUI">here</a>.</i>)
+
 
