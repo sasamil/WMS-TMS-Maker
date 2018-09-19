@@ -4,7 +4,7 @@ Initially, I had wished to develop a C-style program, for this purpose. Frankly,
 
 This code has been compiled by g++, MinGW and Microsoft's VS compilers. It has been working on both Linux and Windows. The prerequisite for building it is that boost and libjpeg libraries are properly installed. This software also applies <a href="http://scumways.com/happyhttp/happyhttp.html">HappyHTTP library</a>. Thanks to Ben Campbell for his code; it's really neat and usefull.
 
-As I've already said, the multitreading version exists (much better performancies) and there is a version with cache-update options (imo, cache-updating is even more frequently needed than cache-creating). More or less, these versions are over but they are still at testing phase. <img src="http://forum.srpskinacionalisti.com/images/smilies/eusa_pray.gif" alt="pray to be good" height="16" width="19"> 
+As I've already said, the multitreading version exists (much better performancies) and there is a version with cache-update options (imo, cache-updating is even more frequently needed than cache-creating). More or less, these versions are over but they are still at testing phase. <img src="https://raw.githubusercontent.com/sasamil/WMS-TMS-Maker-Qt-GUI/master/icons/emoticons/eusa_pray.gif" alt="pray to be good" height="16" width="19"> 
 
 If there are questions in regards to this code/project, or maps caching in general - please, let me know. Suggestions will be welcomed. Don't hesitate to contact me.
 
